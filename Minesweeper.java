@@ -98,7 +98,7 @@ public class Minesweeper implements ActionListener, MouseListener {
     public void updateLabels() {
         width.setText("Width: " + Integer.toString(mp.playground.cellsX));
         f.add(width);
-        height.setText("Height; " + Integer.toString(mp.playground.cellsY));
+        height.setText("Height: " + Integer.toString(mp.playground.cellsY));
         f.add(height);
         seed.setText("Seed: " + mp.playground.seed);
         f.add(seed);

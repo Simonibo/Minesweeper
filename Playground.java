@@ -1,9 +1,7 @@
 import java.util.Random;
 import javax.swing.JPanel;
 import javax.swing.JOptionPane;
-import java.awt.Dimension;
-import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.*;
 import javax.swing.JFrame;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -114,14 +112,14 @@ class Playground {
                     g.fillRect(x * cellWidth, y * cellHeight, cellWidth, cellHeight);
                     g.setColor(Color.BLACK);
                     if(neighbors[x][y] > 0) {
-                        g.drawString(Integer.toString(neighbors[x][y]), (int) ((x + 0.25) * cellWidth), (int) ((y + 0.75) * cellHeight));
+                        drawCenteredString(g, Integer.toString(neighbors[x][y]), new Rectangle(x * cellWidth, y * cellHeight, cellWidth, cellHeight));
                     }
                 } else {
                     g.setColor(Color.LIGHT_GRAY);
                     g.fillRect(x * cellWidth, y * cellHeight, cellWidth, cellHeight);
                     if(flagged[x][y]) {
                         g.setColor(Color.BLACK);
-                        g.drawString("F", (int) ((x + 0.25) * cellWidth), (int) ((y + 0.75) * cellHeight));
+                        drawCenteredString(g, "F", new Rectangle(x * cellWidth, y * cellHeight, cellWidth, cellHeight));
                     }
                 }
                 g.setColor(Color.BLACK);
@@ -200,8 +198,18 @@ class Playground {
         }
         return hits;
     }
-    
-    
+
+    public void drawCenteredString(Graphics g, String text, Rectangle rect) {
+        // Get the FontMetrics
+        FontMetrics metrics = g.getFontMetrics(g.getFont());
+        // Determine the X coordinate for the text
+        int x = rect.x + (rect.width - metrics.stringWidth(text)) / 2;
+        // Determine the Y coordinate for the text (note we add the ascent, as in java 2d 0 is top of the screen)
+        int y = rect.y + ((rect.height - metrics.getHeight()) / 2) + metrics.getAscent();
+        // Draw the String
+        g.drawString(text, x, y);
+    }
+
     public void changeFlagged(int x, int y) {
         flagged[x][y] = !flagged[x][y];
         flaggedCount += flagged[x][y] ? 1 : -1;
