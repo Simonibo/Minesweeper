@@ -14,6 +14,7 @@ public class MinePanel extends JPanel {
                 public void mousePressed(MouseEvent e) {
                     if(e.getX() < playground.cellsX * playground.cellWidth && e.getY() < playground.cellsY * playground.cellHeight && playground.handleMousePress(e) == 1) {
                         newgame();
+                        parent.updateLabels();
                     }
                     repaint();
                 }
@@ -80,6 +81,7 @@ public class MinePanel extends JPanel {
                 playground = new Playground(this, 20, 20, outputs[0], outputs[1], outputs[2], outputs[3]);
             }
         }
+        parent.updateLabels();
         repaint();
     }
 

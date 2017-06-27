@@ -20,6 +20,7 @@ public class Minesweeper implements ActionListener, MouseListener {
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         f.setSize(1235, 1039);
         f.setLayout(null);
+        f.setResizable(false);
 
         mp = new MinePanel(this);
         mp.setSize(1001, 1001);
